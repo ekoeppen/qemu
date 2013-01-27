@@ -309,7 +309,7 @@ static const MemoryRegionOps stm32_exti_ops = {
 
 static void stm32_exti_reset(DeviceState *dev)
 {
-    Stm32Exti *s = FROM_SYSBUS(Stm32Exti, sysbus_from_qdev(dev));
+    Stm32Exti *s = FROM_SYSBUS(Stm32Exti, SYS_BUS_DEVICE(dev));
 
     s->EXTI_IMR = 0x00000000;
     s->EXTI_RTSR = 0x00000000;

@@ -331,7 +331,7 @@ static const MemoryRegionOps stm32_gpio_ops = {
 
 static void stm32_gpio_reset(DeviceState *dev)
 {
-    Stm32Gpio *s = FROM_SYSBUS(Stm32Gpio, sysbus_from_qdev(dev));
+    Stm32Gpio *s = FROM_SYSBUS(Stm32Gpio, SYS_BUS_DEVICE(dev));
 
     stm32_gpio_GPIOx_CRy_write(s, GPIOx_CRL_INDEX, 0x44444444, true);
     stm32_gpio_GPIOx_CRy_write(s, GPIOx_CRH_INDEX, 0x44444444, true);

@@ -113,9 +113,9 @@ static DeviceState *stm32_init_periph(DeviceState *dev, stm32_periph_t periph,
                                         hwaddr addr, qemu_irq irq)
 {
     qdev_init_nofail(dev);
-    sysbus_mmio_map(sysbus_from_qdev(dev), 0, addr);
+    sysbus_mmio_map(SYS_BUS_DEVICE(dev), 0, addr);
     if (irq) {
-        sysbus_connect_irq(sysbus_from_qdev(dev), 0, irq);
+        sysbus_connect_irq(SYS_BUS_DEVICE(dev), 0, irq);
     }
     return dev;
 }
@@ -156,7 +156,7 @@ void stm32_init(
     DeviceState *flash_dev = qdev_create(NULL, "stm32_flash");
     qdev_prop_set_uint32(flash_dev, "size", 0x1FFFF);
     qdev_init_nofail(flash_dev);
-    sysbus_mmio_map(sysbus_from_qdev(flash_dev), 0, 0x08000000);
+    sysbus_mmio_map(SYS_BUS_DEVICE(flash_dev), 0, 0x08000000);
 
     DeviceState *rcc_dev = qdev_create(NULL, "stm32_rcc");
     qdev_prop_set_uint32(rcc_dev, "osc_freq", osc_freq);
@@ -176,7 +176,7 @@ void stm32_init(
     DeviceState *exti_dev = qdev_create(NULL, "stm32_exti");
     qdev_prop_set_ptr(exti_dev, "stm32_gpio", gpio_dev);
     stm32_init_periph(exti_dev, STM32_EXTI, 0x40010400, NULL);
-    SysBusDevice *exti_busdev = sysbus_from_qdev(exti_dev);
+    SysBusDevice *exti_busdev = SYS_BUS_DEVICE(exti_dev);
     sysbus_connect_irq(exti_busdev, 0, pic[STM32_EXTI0_IRQ]);
     sysbus_connect_irq(exti_busdev, 1, pic[STM32_EXTI1_IRQ]);
     sysbus_connect_irq(exti_busdev, 2, pic[STM32_EXTI2_IRQ]);
