@@ -22,7 +22,7 @@
 #ifndef STM32_H
 #define STM32_H
 
-#include "qemu-timer.h"
+#include "qemu/timer.h"
 #include "arm-misc.h"
 #include "qemu-common.h"
 #include "sysbus.h"

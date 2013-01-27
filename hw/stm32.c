@@ -20,7 +20,7 @@
  */
 
 #include "stm32.h"
-#include "exec-memory.h"
+#include "exec/memory.h"
 
 
 /* DEFINITIONS */
