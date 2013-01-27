@@ -108,7 +108,7 @@ const char *stm32_periph_name(stm32_periph_t periph)
  */
 
 static DeviceState *stm32_init_periph(DeviceState *dev, stm32_periph_t periph,
-                                        target_phys_addr_t addr, qemu_irq irq)
+                                        hwaddr addr, qemu_irq irq)
 {
     qdev_init_nofail(dev);
     sysbus_mmio_map(sysbus_from_qdev(dev), 0, addr);
@@ -123,7 +123,7 @@ static Stm32Uart *stm32_create_uart_dev(
         DeviceState *rcc_dev,
         DeviceState **gpio_dev,
         DeviceState *afio_dev,
-        target_phys_addr_t addr,
+        hwaddr addr,
         qemu_irq irq)
 {
     DeviceState *uart_dev = qdev_create(NULL, "stm32_uart");
